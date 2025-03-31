@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Signup</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sign In Form -->
+        <div class="form-box" id="signInForm">
+            <h2>Hello Coder!</h2>
+            <input type="email" id="signInEmail" placeholder="Email" required>
+            <input type="password" id="signInPassword" placeholder="Password" required>
+            <button id="signInBtn">Sign In</button>
+            <a href="#" id="forgotPasswordLink">Forgot Password?</a>
+            <p>Don't have an account? <a href="#" id="signUpLink">Sign Up</a></p>
+            <div id="signInError" class="error-message"></div>
+        </div>
+
+        <!-- Sign Up Form -->
+        <div class="form-box hidden" id="signUpForm">
+            <h2>Create Your Account</h2>
+            <input type="text" id="signUpName" placeholder="Full Name" required>
+            <input type="email" id="signUpEmail" placeholder="Email" required>
+            <input type="password" id="signUpPassword" placeholder="Password" required>
+            <button id="signUpBtn">Sign Up</button>
+            <p>Already have an account? <a href="#" id="backToSignIn">Sign In</a></p>
+            <div id="signUpError" class="error-message"></div>
+        </div>
+
+        <!-- Forgot Password Form -->
+        <div class="form-box hidden" id="forgotPasswordForm">
+            <h2>Reset Password</h2>
+            <input type="email" id="forgotPasswordEmail" placeholder="Enter your email" required>
+            <button id="resetPasswordBtn">Reset Password</button>
+            <a href="#" id="backToSignIn2">Back to Sign In</a>
+            <div id="resetError" class="error-message"></div>
+        </div>
+    </div>
+
+    <script>
+        // Firebase Configuration - REPLACE WITH YOUR CONFIG
+        const firebaseConfig = {
+  apiKey: "AIzaSyB_yXqNehl1H6YOhsBzsdTFRF2YrPgK6DM",
+  authDomain: "login-page-ce358.firebaseapp.com",
+  projectId: "login-page-ce358",
+  storageBucket: "login-page-ce358.firebasestorage.app",
+  messagingSenderId: "727307472365",
+  appId: "1:727307472365:web:4be095496ddb1ad98a2be4"
+};
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Only check auth state once when page loads
+        const authCheck = firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                // User is logged in, redirect to dashboard
+                authCheck(); // Unsubscribe the listener
+                window.location.href = "dashboard.html";
+            }
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
